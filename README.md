@@ -4,43 +4,43 @@
    1. ## **Prerequisites**<br  />
       Ensure your system is up-to-date:<br  />
       
-            *sudo dnf update -y*
+            sudo dnf update -y
       
    1. ## **Install Elasticsearch**<br  />
    
       1. ### **Import the Elasticsearch GPG key:**<br  />
       
-               *sudo rpm --import <https://artifacts.elastic.co/GPG-KEY-elasticsearch>*
+               sudo rpm --import <https://artifacts.elastic.co/GPG-KEY-elasticsearch>
          
       1. ### **Create a repository file for Elasticsearch:**<br  />
       
-               *sudo tee /etc/yum.repos.d/elasticsearch.repo <<EOF [elasticsearch] name=Elasticsearch repository baseurl=<https://artifacts.elastic.co/packages/7.x/yum> gpgcheck=1 gpgkey=<https://artifacts.elastic.co/GPG-KEY-elasticsearch> enabled=1 autorefresh=1 type=rpm-md EOF*
+               sudo tee /etc/yum.repos.d/elasticsearch.repo <<EOF [elasticsearch] name=Elasticsearch repository baseurl=<https://artifacts.elastic.co/packages/7.x/yum> gpgcheck=1 gpgkey=<https://artifacts.elastic.co/GPG-KEY-elasticsearch> enabled=1 autorefresh=1 type=rpm-md EOF
          
       1. ### **Install Elasticsearch:**<br  />
       
-               *sudo dnf install elasticsearch -y*
+               sudo dnf install elasticsearch -y
 
       1. ### **Enable and start the Elasticsearch service:**<br  />
       
-               *sudo systemctl enable elasticsearch sudo systemctl start elasticsearch*
+               sudo systemctl enable elasticsearch sudo systemctl start elasticsearch
 
        1. ### **Verify Elasticsearch installation:**<br  />
       
-               *curl -X GET "[localhost:9200/](http://localhost:9200/)"*
+               curl -X GET "[localhost:9200/](http://localhost:9200/)"
   
    1. ## **Install Kibana**<br  />
    
       1. ### **Create a repository file for Kibana:**<br  />
       
-               *sudo tee /etc/yum.repos.d/kibana.repo <<EOF [kibana] name=Kibana repository baseurl=<https://artifacts.elastic.co/packages/7.x/yum> gpgcheck=1 gpgkey=<https://artifacts.elastic.co/GPG-KEY-elasticsearch> enabled=1 autorefresh=1 type=rpm-md EOF*
+               sudo tee /etc/yum.repos.d/kibana.repo <<EOF [kibana] name=Kibana repository baseurl=<https://artifacts.elastic.co/packages/7.x/yum> gpgcheck=1 gpgkey=<https://artifacts.elastic.co/GPG-KEY-elasticsearch> enabled=1 autorefresh=1 type=rpm-md EOF
 
       1. ### **Install Kibana:**<br  />
       
-               *sudo dnf install kibana -y*
+               sudo dnf install kibana -y
 
       1. ### **Enable and start the Kibana service:**<br  />
       
-               *sudo systemctl enable kibana sudo systemctl start kibana*
+               sudo systemctl enable kibana sudo systemctl start kibana
 
        1. ### **Verify Kibana installation:**<br  />
 
@@ -50,23 +50,23 @@
    
       1. ### **Create a repository file for Metricbeat:**<br  />
       
-               *sudo tee /etc/yum.repos.d/metricbeat.repo <<EOF [elastic-7.x] name=Elastic 7.x baseurl=<https://artifacts.elastic.co/packages/7.x/yum> gpgcheck=1 gpgkey=<https://artifacts.elastic.co/GPG-KEY-elasticsearch> enabled=1 autorefresh=1 type=rpm-md EOF*
+               sudo tee /etc/yum.repos.d/metricbeat.repo <<EOF [elastic-7.x] name=Elastic 7.x baseurl=<https://artifacts.elastic.co/packages/7.x/yum> gpgcheck=1 gpgkey=<https://artifacts.elastic.co/GPG-KEY-elasticsearch> enabled=1 autorefresh=1 type=rpm-md EOF
 
       1. ### **Install Metricbeat:**<br  />
       
-               *sudo dnf install metricbeat -y*
+               sudo dnf install metricbeat -y
 
       1. ### **Enable and start the Metricbeat service:**<br  />
       
-               *sudo systemctl enable metricbeat sudo systemctl start metricbeat*
+               sudo systemctl enable metricbeat sudo systemctl start metricbeat
    
    1. ### **Configure Metricbeat:**<br  />
    
-            *sudo metricbeat modules enable system sudo metricbeat setup*
+            sudo metricbeat modules enable system sudo metricbeat setup
 
       1. ### **Verify Metricbeat installation:**<br  />
       
-               *sudo systemctl status metricbeat*
+               sudo systemctl status metricbeat
 
          **How to acess ?**
 
@@ -76,7 +76,7 @@
          
          **Edit the Elasticsearch configuration file:**
 
-            *sudo nano /etc/elasticsearch/elasticsearch.yml*
+            sudo nano /etc/elasticsearch/elasticsearch.yml
 
          **Find the line that starts with [network.host](http://network.host/) and Update it to:**
 
@@ -90,13 +90,13 @@
 
          **Restart Elasticsearch for the changes to take effect:**
 
-            *sudo systemctl restart elasticsearch*
+            sudo systemctl restart elasticsearch
 
          **Check Elasticsearch Connection:**
 
          **Ensure that Metricbeat can connect to Elasticsearch by testing the connection:**
 
-            *curl -X GET "[http://103.151.111.242:9200](http://103.151.111.242:9200/)"*
+            curl -X GET "[http://103.151.111.242:9200](http://103.151.111.242:9200/)"
          
    1. ### **Configure Kibana to Connect to Elasticsearch**
          
@@ -128,7 +128,7 @@
 
          **Restart Kibana for the changes to take effect:**
 
-            *sudo systemctl restart kibana*
+            sudo systemctl restart kibana
 
          **Check Kibana Connection:**
 
@@ -138,7 +138,7 @@
          
    1. ### **Configure Metricbeat configuration file to specify Elasticsearch as the output:**
       
-            *sudo nano /etc/metricbeat/metricbeat.yml*
+            sudo nano /etc/metricbeat/metricbeat.yml
 
          **Find the Elasticsearch output section (usually towards the end of the file) and configure it like this:**
 
@@ -152,25 +152,25 @@
 
          **Enable and Start Metricbeat Enable the Metricbeat service to start on boot:**
 
-            *sudo systemctl enable metricbeat*
+            sudo systemctl enable metricbeat
 
          **Start the Metricbeat service:**
 
-            *sudo systemctl start metricbeat*
+            sudo systemctl start metricbeat
 
          **Verify Metricbeat Operation Check the status of Metricbeat to ensure it is running without errors:**
 
-            *sudo systemctl status metricbeat*
+            sudo systemctl status metricbeat
 
       **Configure Metricbeat Modules (optional) Metricbeat comes with modules that collect specific metrics. You can enable modules based on your needs. For example, to enable the system module:**
 
-            *sudo metricbeat modules enable system*
+            udo metricbeat modules enable system
 
          **Then, load the dashboards and start Metricbeat:**
 
-            *sudo metricbeat setup*
+            sudo metricbeat setup
 
-            *sudo systemctl restart metricbeat*
+            sudo systemctl restart metricbeat
 
          **Accessing Metricbeat Data in Kibana After Metricbeat starts sending data to Elasticsearch, you can visualize and analyze the data in Kibana. Access Kibana using** [**http://103.151.111.242:5601/**](http://103.151.111.242:5601/) **in your web browser.**
 
@@ -195,10 +195,10 @@
 
             **Restart Elasticsearch**
 
-                  *sudo systemctl restart elasticsearch*
+                  sudo systemctl restart elasticsearch
             
          1. #### **Verify Elasticsearch Status**
             
             **Restart Elasticsearch**
             
-                  *sudo systemctl status elasticsearch*
+                  sudo systemctl status elasticsearch
