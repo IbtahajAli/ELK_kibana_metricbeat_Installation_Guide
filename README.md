@@ -45,7 +45,7 @@
 
          Find the line that starts with [network.host](http://network.host/) and Update it to:
 
-         ###makefile
+         makefile
 
          Copy code
 
