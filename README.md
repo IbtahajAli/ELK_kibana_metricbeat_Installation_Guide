@@ -44,65 +44,65 @@
          
          **Edit the Elasticsearch configuration file:**
 
-         *sudo nano /etc/elasticsearch/elasticsearch.yml*
+            *sudo nano /etc/elasticsearch/elasticsearch.yml*
 
          **Find the line that starts with [network.host](http://network.host/) and Update it to:**
 
-         makefile
+            makefile
 
-         Copy code
+            Copy code
 
-         [network.host](http://network.host/): 103.151.111.242
+               [network.host](http://network.host/): 103.151.111.242
 
          **Save and close the file.**
 
          **Restart Elasticsearch for the changes to take effect:**
 
-         *sudo systemctl restart elasticsearch*
+            *sudo systemctl restart elasticsearch*
 
          **Check Elasticsearch Connection:**
 
          **Ensure that Metricbeat can connect to Elasticsearch by testing the connection:**
 
-         *curl -X GET "[http://103.151.111.242:9200](http://103.151.111.242:9200/)"*
+            *curl -X GET "[http://103.151.111.242:9200](http://103.151.111.242:9200/)"*
          
    1. ### **Configure Kibana to Connect to Elasticsearch**
          
          **Edit the Kibana configuration file:**
 
-         sudo nano /etc/kibana/kibana.yml
+            sudo nano /etc/kibana/kibana.yml
 
          **Find the line that starts with [server.host](http://server.host/) and Update it to:**
 
-         server.host: "0.0.0.0"
+            server.host: "0.0.0.0"
 
-         elasticsearch.hosts: ["[http://103.151.111.242:9200](http://103.151.111.242:9200/)"]
+            elasticsearch.hosts: ["[http://103.151.111.242:9200](http://103.151.111.242:9200/)"]
 
          **Add or modify the logging settings:**
 
          logging:
 
-         verbose: true
+            verbose: true
 
          **Optionally, configure the Kibana section to use Kibana for setup:**
 
-         setup.kibana: host: "[http://103.151.111.242:5601](http://103.151.111.242:5601/)"
+            setup.kibana: host: "[http://103.151.111.242:5601](http://103.151.111.242:5601/)"
 
-         ssl.enabled: false
+            ssl.enabled: false
 
-         timeout: 60s
+            timeout: 60s
 
          **Save and close the file.**
 
          **Restart Kibana for the changes to take effect:**
 
-         *sudo systemctl restart kibana*
+            *sudo systemctl restart kibana*
 
          **Check Kibana Connection:**
 
          **Test the connection to Kibana:**
 
-         curl -X GET "[http://103.151.111.242:5601](http://103.151.111.242:5601/)"
+            curl -X GET "[http://103.151.111.242:5601](http://103.151.111.242:5601/)"
          
    1. ### **Configure Metricbeat configuration file to specify Elasticsearch as the output:**
       
@@ -112,33 +112,33 @@
 
          output.elasticsearch:
 
-         hosts: ["103.151.111.242:9200"]
+            hosts: ["103.151.111.242:9200"]
 
-         setup.ilm.overwrite: true
+            setup.ilm.overwrite: true
 
          **Save and close the file.**
 
          **Enable and Start Metricbeat Enable the Metricbeat service to start on boot:**
 
-         *sudo systemctl enable metricbeat*
+            *sudo systemctl enable metricbeat*
 
          **Start the Metricbeat service:**
 
-         *sudo systemctl start metricbeat*
+            *sudo systemctl start metricbeat*
 
          **Verify Metricbeat Operation Check the status of Metricbeat to ensure it is running without errors:**
 
-         *sudo systemctl status metricbeat*
+            *sudo systemctl status metricbeat*
 
       **Configure Metricbeat Modules (optional) Metricbeat comes with modules that collect specific metrics. You can enable modules based on your needs. For example, to enable the system module:**
 
-         *sudo metricbeat modules enable system*
+            *sudo metricbeat modules enable system*
 
          **Then, load the dashboards and start Metricbeat:**
 
-         *sudo metricbeat setup*
+            *sudo metricbeat setup*
 
-         *sudo systemctl restart metricbeat*
+            *sudo systemctl restart metricbeat*
 
          **Accessing Metricbeat Data in Kibana After Metricbeat starts sending data to Elasticsearch, you can visualize and analyze the data in Kibana. Access Kibana using** [**http://103.151.111.242:5601/**](http://103.151.111.242:5601/) **in your web browser.**
 
@@ -146,27 +146,27 @@
 
          Edit the Elasticsearch configuration file (/etc/elasticsearch/elasticsearch.yml) and ensure the following settings are correctly configured:
 
-         cluster.name: my-cluster
-
-         node.name: node-1
-
-         network.host: 103.151.111.242
-
-         discovery.seed\_hosts: ["103.151.111.242"]
-
-         cluster.initial\_master\_nodes: ["node-1"]
+            cluster.name: my-cluster
+            
+            node.name: node-1
+            
+            network.host: 103.151.111.242
+            
+            discovery.seed\_hosts: ["103.151.111.242"]
+            
+            cluster.initial\_master\_nodes: ["node-1"]
          1. #### **Disable Bootstrap Checks (Temporary)**
       
             **As a temporary measure for troubleshooting, you can disable bootstrap checks in elasticsearch.yml:**
 
-            bootstrap.memory\_lock: false
+               bootstrap.memory\_lock: false
 
             **Restart Elasticsearch**
 
-            *sudo systemctl restart elasticsearch*
+               *sudo systemctl restart elasticsearch*
             
          1. #### **Verify Elasticsearch Status**
             
             **Restart Elasticsearch**
             
-            *sudo systemctl status elasticsearch*
+               *sudo systemctl status elasticsearch*
