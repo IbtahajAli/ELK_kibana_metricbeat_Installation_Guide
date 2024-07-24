@@ -80,10 +80,6 @@
 
          **Find the line that starts with [network.host](http://network.host/) and Update it to:**
 
-      *makefile*
-
-      *Copy code*
-
                [network.host](http://network.host/): 103.151.111.242
 
          **Save and close the file.**
