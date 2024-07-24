@@ -3,38 +3,70 @@
 ﻿1.**Installing Elasticsearch, Kibana, and Metricbeat on AlmaLinux 8.6**<br  />
    1. ## **Prerequisites**<br  />
       Ensure your system is up-to-date:<br  />
-         *sudo dnf update -y*
+      
+            *sudo dnf update -y*
+      
    1. ## **Install Elasticsearch**<br  />
+   
       1. ### **Import the Elasticsearch GPG key:**<br  />
-            *sudo rpm --import <https://artifacts.elastic.co/GPG-KEY-elasticsearch>*
+      
+               *sudo rpm --import <https://artifacts.elastic.co/GPG-KEY-elasticsearch>*
+         
       1. ### **Create a repository file for Elasticsearch:**<br  />
-            *sudo tee /etc/yum.repos.d/elasticsearch.repo <<EOF [elasticsearch] name=Elasticsearch repository baseurl=<https://artifacts.elastic.co/packages/7.x/yum> gpgcheck=1 gpgkey=<https://artifacts.elastic.co/GPG-KEY-elasticsearch> enabled=1 autorefresh=1 type=rpm-md EOF*
+      
+               *sudo tee /etc/yum.repos.d/elasticsearch.repo <<EOF [elasticsearch] name=Elasticsearch repository baseurl=<https://artifacts.elastic.co/packages/7.x/yum> gpgcheck=1 gpgkey=<https://artifacts.elastic.co/GPG-KEY-elasticsearch> enabled=1 autorefresh=1 type=rpm-md EOF*
+         
       1. ### **Install Elasticsearch:**<br  />
-            *sudo dnf install elasticsearch -y*
+      
+               *sudo dnf install elasticsearch -y*
+
       1. ### **Enable and start the Elasticsearch service:**<br  />
-            *sudo systemctl enable elasticsearch sudo systemctl start elasticsearch*
-      1. ### **Verify Elasticsearch installation:**<br  />
-            *curl -X GET "[localhost:9200/](http://localhost:9200/)"*
+      
+               *sudo systemctl enable elasticsearch sudo systemctl start elasticsearch*
+
+       1. ### **Verify Elasticsearch installation:**<br  />
+      
+               *curl -X GET "[localhost:9200/](http://localhost:9200/)"*
+  
    1. ## **Install Kibana**<br  />
+   
       1. ### **Create a repository file for Kibana:**<br  />
-            *sudo tee /etc/yum.repos.d/kibana.repo <<EOF [kibana] name=Kibana repository baseurl=<https://artifacts.elastic.co/packages/7.x/yum> gpgcheck=1 gpgkey=<https://artifacts.elastic.co/GPG-KEY-elasticsearch> enabled=1 autorefresh=1 type=rpm-md EOF*
+      
+               *sudo tee /etc/yum.repos.d/kibana.repo <<EOF [kibana] name=Kibana repository baseurl=<https://artifacts.elastic.co/packages/7.x/yum> gpgcheck=1 gpgkey=<https://artifacts.elastic.co/GPG-KEY-elasticsearch> enabled=1 autorefresh=1 type=rpm-md EOF*
+
       1. ### **Install Kibana:**<br  />
-            *sudo dnf install kibana -y*
+      
+               *sudo dnf install kibana -y*
+
       1. ### **Enable and start the Kibana service:**<br  />
-            *sudo systemctl enable kibana sudo systemctl start kibana*
-      1. ### **Verify Kibana installation:**<br  />
+      
+               *sudo systemctl enable kibana sudo systemctl start kibana*
+
+       1. ### **Verify Kibana installation:**<br  />
+
          *Open a web browser and go to [http://localhost:5601](http://localhost:5601/).*
+   
    1. ## **Install Metricbeat**<br  />
+   
       1. ### **Create a repository file for Metricbeat:**<br  />
-            *sudo tee /etc/yum.repos.d/metricbeat.repo <<EOF [elastic-7.x] name=Elastic 7.x baseurl=<https://artifacts.elastic.co/packages/7.x/yum> gpgcheck=1 gpgkey=<https://artifacts.elastic.co/GPG-KEY-elasticsearch> enabled=1 autorefresh=1 type=rpm-md EOF*
+      
+               *sudo tee /etc/yum.repos.d/metricbeat.repo <<EOF [elastic-7.x] name=Elastic 7.x baseurl=<https://artifacts.elastic.co/packages/7.x/yum> gpgcheck=1 gpgkey=<https://artifacts.elastic.co/GPG-KEY-elasticsearch> enabled=1 autorefresh=1 type=rpm-md EOF*
+
       1. ### **Install Metricbeat:**<br  />
-            *sudo dnf install metricbeat -y*
+      
+               *sudo dnf install metricbeat -y*
+
       1. ### **Enable and start the Metricbeat service:**<br  />
-            *sudo systemctl enable metricbeat sudo systemctl start metricbeat*
+      
+               *sudo systemctl enable metricbeat sudo systemctl start metricbeat*
+   
    1. ### **Configure Metricbeat:**<br  />
+   
             *sudo metricbeat modules enable system sudo metricbeat setup*
+
       1. ### **Verify Metricbeat installation:**<br  />
-            *sudo systemctl status metricbeat*
+      
+               *sudo systemctl status metricbeat*
 
          **How to acess ?**
 
@@ -80,9 +112,9 @@
 
          **Add or modify the logging settings:**
 
-         logging:
+            logging:
 
-            verbose: true
+               verbose: true
 
          **Optionally, configure the Kibana section to use Kibana for setup:**
 
@@ -106,7 +138,7 @@
          
    1. ### **Configure Metricbeat configuration file to specify Elasticsearch as the output:**
       
-         sudo nano /etc/metricbeat/metricbeat.yml
+            *sudo nano /etc/metricbeat/metricbeat.yml*
 
          **Find the Elasticsearch output section (usually towards the end of the file) and configure it like this:**
 
@@ -159,14 +191,14 @@
       
             **As a temporary measure for troubleshooting, you can disable bootstrap checks in elasticsearch.yml:**
 
-               bootstrap.memory\_lock: false
+                  bootstrap.memory\_lock: false
 
             **Restart Elasticsearch**
 
-               *sudo systemctl restart elasticsearch*
+                  *sudo systemctl restart elasticsearch*
             
          1. #### **Verify Elasticsearch Status**
             
             **Restart Elasticsearch**
             
-               *sudo systemctl status elasticsearch*
+                  *sudo systemctl status elasticsearch*
