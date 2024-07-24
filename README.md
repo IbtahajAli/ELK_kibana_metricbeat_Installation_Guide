@@ -3,7 +3,7 @@
    1. ## **Prerequisites**
       Ensure your system is up-to-date:
       *sudo dnf update -y*
-   1. ## **1. Install Elasticsearch**
+   1. ## **Install Elasticsearch**
       1. ### **Import the Elasticsearch GPG key:**
          *sudo rpm --import <https://artifacts.elastic.co/GPG-KEY-elasticsearch>*
       1. ### **Create a repository file for Elasticsearch:**
@@ -14,7 +14,7 @@
          *sudo systemctl enable elasticsearch sudo systemctl start elasticsearch*
       1. ### **Verify Elasticsearch installation:**
          *curl -X GET "[localhost:9200/](http://localhost:9200/)"*
-   1. ## **2. Install Kibana**
+   1. ## **Install Kibana**
       1. ### **Create a repository file for Kibana:**
          *sudo tee /etc/yum.repos.d/kibana.repo <<EOF [kibana] name=Kibana repository baseurl=<https://artifacts.elastic.co/packages/7.x/yum> gpgcheck=1 gpgkey=<https://artifacts.elastic.co/GPG-KEY-elasticsearch> enabled=1 autorefresh=1 type=rpm-md EOF*
       1. ### **Install Kibana:**
@@ -23,7 +23,7 @@
          *sudo systemctl enable kibana sudo systemctl start kibana*
       1. ### **Verify Kibana installation:**
          *Open a web browser and go to [http://localhost:5601](http://localhost:5601/).*
-   1. ## **3. Install Metricbeat**
+   1. ## **Install Metricbeat**
       1. ### **Create a repository file for Metricbeat:**
          *sudo tee /etc/yum.repos.d/metricbeat.repo <<EOF [elastic-7.x] name=Elastic 7.x baseurl=<https://artifacts.elastic.co/packages/7.x/yum> gpgcheck=1 gpgkey=<https://artifacts.elastic.co/GPG-KEY-elasticsearch> enabled=1 autorefresh=1 type=rpm-md EOF*
       1. ### **Install Metricbeat:**
@@ -38,7 +38,7 @@
          **How to acess ?**
 
          To access Elasticsearch, Kibana, and Metricbeat from a browser using the IP address 103.151.111.242, you'll need to configure the services to listen on the IP address instead of [localhost](http://localhost/) (127.0.0.1). Here’s how you can do it:
-      1. ### **1. Configure Elasticsearch to Listen on IP Address**
+      1. ### **Configure Elasticsearch to Listen on IP Address**
          Edit the Elasticsearch configuration file:
 
          *sudo nano /etc/elasticsearch/elasticsearch.yml*
@@ -62,7 +62,7 @@
          Ensure that Metricbeat can connect to Elasticsearch by testing the connection:
 
          *curl -X GET "[http://103.151.111.242:9200](http://103.151.111.242:9200/)"*
-      1. ### **2. Configure Kibana to Connect to Elasticsearch**
+      1. ### **Configure Kibana to Connect to Elasticsearch**
          Edit the Kibana configuration file:
 
          sudo nano /etc/kibana/kibana.yml
@@ -98,7 +98,7 @@
          Test the connection to Kibana:
 
          curl -X GET "[http://103.151.111.242:5601](http://103.151.111.242:5601/)"
-      1. ### **3. Configure Metricbeat configuration file to specify Elasticsearch as the output:**
+      1. ### **Configure Metricbeat configuration file to specify Elasticsearch as the output:**
          sudo nano /etc/metricbeat/metricbeat.yml
 
          **Find the Elasticsearch output section (usually towards the end of the file) and configure it like this:**
@@ -111,7 +111,7 @@
 
          **Save and close the file.**
 
-         **1. Enable and Start Metricbeat Enable the Metricbeat service to start on boot:**
+         **Enable and Start Metricbeat Enable the Metricbeat service to start on boot:**
 
          *sudo systemctl enable metricbeat*
 
@@ -119,11 +119,11 @@
 
          *sudo systemctl start metricbeat*
 
-         **2. Verify Metricbeat Operation Check the status of Metricbeat to ensure it is running without errors:**
+         **Verify Metricbeat Operation Check the status of Metricbeat to ensure it is running without errors:**
 
          *sudo systemctl status metricbeat*
 
-         **3. Configure Metricbeat Modules (optional) Metricbeat comes with modules that collect specific metrics. You can enable modules based on your needs. For example, to enable the system module:**
+      **Configure Metricbeat Modules (optional) Metricbeat comes with modules that collect specific metrics. You can enable modules based on your needs. For example, to enable the system module:**
 
          *sudo metricbeat modules enable system*
 
@@ -133,9 +133,9 @@
 
          *sudo systemctl restart metricbeat*
 
-         **4. Accessing Metricbeat Data in Kibana After Metricbeat starts sending data to Elasticsearch, you can visualize and analyze the data in Kibana. Access Kibana using** [**http://103.151.111.242:5601/**](http://103.151.111.242:5601/) **in your web browser.**
+         **Accessing Metricbeat Data in Kibana After Metricbeat starts sending data to Elasticsearch, you can visualize and analyze the data in Kibana. Access Kibana using** [**http://103.151.111.242:5601/**](http://103.151.111.242:5601/) **in your web browser.**
 
-         **5. Adjust Elasticsearch Configuration:**
+         **Adjust Elasticsearch Configuration:**
 
          Edit the Elasticsearch configuration file (/etc/elasticsearch/elasticsearch.yml) and ensure the following settings are correctly configured:
 
@@ -148,7 +148,7 @@
          discovery.seed\_hosts: ["103.151.111.242"]
 
          cluster.initial\_master\_nodes: ["node-1"]
-         1. #### **6. Disable Bootstrap Checks (Temporary)**
+         1. #### **Disable Bootstrap Checks (Temporary)**
             As a temporary measure for troubleshooting, you can disable bootstrap checks in elasticsearch.yml:
 
             bootstrap.memory\_lock: false
