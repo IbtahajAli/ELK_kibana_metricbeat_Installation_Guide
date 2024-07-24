@@ -1,3 +1,4 @@
+
 # ELK_kibana_metricbeat_Installation_Guide<br  />
 ﻿1.**Installing Elasticsearch, Kibana, and Metricbeat on AlmaLinux 8.6**<br  />
    1. ## **Prerequisites**<br  />
@@ -30,7 +31,7 @@
          *sudo dnf install metricbeat -y*<br  />
       1. ### **Enable and start the Metricbeat service:**<br  />
          *sudo systemctl enable metricbeat sudo systemctl start metricbeat*<br  />
-      1. ### **Configure Metricbeat:**<br  />
+1. ### **Configure Metricbeat:**<br  />
          *sudo metricbeat modules enable system sudo metricbeat setup*<br  />
       1. ### **Verify Metricbeat installation:**<br  />
          *sudo systemctl status metricbeat*<br  />
@@ -39,7 +40,7 @@
 
          To access Elasticsearch, Kibana, and Metricbeat from a browser using the IP address 103.151.111.242, you'll need to configure the services to listen on the IP address instead of [localhost](http://localhost/) (127.0.0.1). Here’s how you can do it:
          
-      1. ### **Configure Elasticsearch to Listen on IP Address**
+   1. ### **Configure Elasticsearch to Listen on IP Address**
          
          **Edit the Elasticsearch configuration file:**
 
@@ -65,7 +66,7 @@
 
          *curl -X GET "[http://103.151.111.242:9200](http://103.151.111.242:9200/)"*
          
-      1. ### **Configure Kibana to Connect to Elasticsearch**
+   1. ### **Configure Kibana to Connect to Elasticsearch**
          
          **Edit the Kibana configuration file:**
 
@@ -103,7 +104,7 @@
 
          curl -X GET "[http://103.151.111.242:5601](http://103.151.111.242:5601/)"
          
-      1. ### **Configure Metricbeat configuration file to specify Elasticsearch as the output:**
+   1. ### **Configure Metricbeat configuration file to specify Elasticsearch as the output:**
       
          sudo nano /etc/metricbeat/metricbeat.yml
 
