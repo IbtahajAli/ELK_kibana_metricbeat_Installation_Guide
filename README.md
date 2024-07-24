@@ -1,5 +1,5 @@
 # ELK_kibana_metricbeat_Installation_Guide<br  />
-﻿1. # **Installing Elasticsearch, Kibana, and Metricbeat on AlmaLinux 8.6**<br  />
+﻿1.**Installing Elasticsearch, Kibana, and Metricbeat on AlmaLinux 8.6**<br  />
    1. ## **Prerequisites**<br  />
       Ensure your system is up-to-date:<br  />
       *sudo dnf update -y*<br  />
