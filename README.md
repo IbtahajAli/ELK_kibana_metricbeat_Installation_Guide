@@ -31,7 +31,7 @@
          *sudo dnf install metricbeat -y*<br  />
       1. ### **Enable and start the Metricbeat service:**<br  />
          *sudo systemctl enable metricbeat sudo systemctl start metricbeat*<br  />
-1. ### **Configure Metricbeat:**<br  />
+   1. ### **Configure Metricbeat:**<br  />
          *sudo metricbeat modules enable system sudo metricbeat setup*<br  />
       1. ### **Verify Metricbeat installation:**<br  />
          *sudo systemctl status metricbeat*<br  />
